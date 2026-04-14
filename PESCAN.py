@@ -32,8 +32,13 @@ if not os.path.exists('./ember'):
     with open('./ember/ember/features.py', 'w') as f:
         f.write(content)
 
-    subprocess.run([sys.executable, '-m', 'pip',
-        'install', './ember', '--quiet'], check=True)
+    #subprocess.run([sys.executable, '-m', 'pip',
+    #   'install', './ember', '--quiet'], check=True)
+import sys
+import os
+ember_dir = os.path.abspath('./ember')
+if ember_dir not in sys.path:
+    sys.path.insert(0, ember_dir)
 import streamlit as st
 import numpy as np
 import xgboost as xgb
