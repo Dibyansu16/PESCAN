@@ -4,7 +4,6 @@ if not os.path.exists('./ember'):
     subprocess.run(['git', 'clone',
         'https://github.com/elastic/ember.git', './ember'], check=True)
     
-    # Patch 1 — entry_name_hashed
     with open('./ember/ember/features.py', 'r') as f:
         lines = f.readlines()
     for i, line in enumerate(lines):
@@ -13,13 +12,13 @@ if not os.path.exists('./ember'):
                 "transform([raw_obj['entry']])",
                 "transform([[raw_obj['entry']]])"
             )
-    # Patch 2 — lief_errors tuple
+    
     for i, line in enumerate(lines):
         if 'lief_errors = ' in line:
             lines[i] = '        lief_errors = (Exception,)\n'
         if line.strip() == 'RuntimeError)':
             lines[i] = ''
-    # Patch 3 — np.int
+    
     with open('./ember/ember/features.py', 'w') as f:
         f.writelines(lines)
     
@@ -34,7 +33,7 @@ if not os.path.exists('./ember'):
         f.write(content)
 
     subprocess.run([sys.executable, '-m', 'pip',
-        'install', '-e', './ember', '--quiet'], check=True)
+        'install', './ember', '--quiet'], check=True)
 import streamlit as st
 import numpy as np
 import xgboost as xgb
