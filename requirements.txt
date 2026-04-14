@@ -5,3 +5,4 @@ matplotlib
 numpy
 lief>=0.17.0
 scikit-learn
+lightgbm
