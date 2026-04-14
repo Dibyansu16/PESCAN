@@ -3,5 +3,5 @@ xgboost
 shap
 matplotlib
 numpy
-lief==0.14.1
+lief>=0.17.0
 scikit-learn
